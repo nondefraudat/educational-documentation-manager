@@ -12,6 +12,7 @@ def firsttime():
     if int(db.execute('SELECT count(*) FROM User').fetchone()[0]) != 0:
         return redirect(url_for('index'))
     if request.method == 'POST':
+        login = request.form['login']
         password = request.form['password']
         password_repeat = request.form['password-repeat']
         error = None
@@ -22,7 +23,7 @@ def firsttime():
         if not error:
             try:
                 db.execute('INSERT INTO User (Login, PasswordHash, Rights) VALUES (?, ?, ?)',
-                        ("root", generate_password_hash(password), 'root'))
+                        (login, generate_password_hash(password), 'root'))
                 db.commit()
             except db.IntegrityError:
                 error = f'Ошибка при выполнении операции'
