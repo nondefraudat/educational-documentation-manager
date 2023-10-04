@@ -6,45 +6,45 @@ import functools
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
-@bp.route('/register', methods=('GET', 'POST'))
-def register():
+@bp.route('/firsttime', methods=('GET', 'POST'))
+def firsttime():
+    db = get_db()
+    if int(db.execute('SELECT count(*) FROM User').fetchone()[0]) != 0:
+        return redirect(url_for('index'))
     if request.method == 'POST':
-        login = request.form['login']
         password = request.form['password']
-        db = get_db()
+        password_repeat = request.form['password-repeat']
         error = None
-
-        if not login:
-            error = 'Введите логин'
-        elif not password:
-            error = 'Введите пароль'
-
-        if error is None:
+        if not password:
+            error = 'Пароль не введен!'
+        elif password != password_repeat:
+            error = 'Пароли не совпадают!'
+        if not error:
             try:
                 db.execute('INSERT INTO User (Login, PasswordHash, Rights) VALUES (?, ?, ?)',
-                        (login, generate_password_hash(password), 'test'))
+                        ("root", generate_password_hash(password), 'root'))
                 db.commit()
             except db.IntegrityError:
-                error = f'Пользователь с таким логином уже существует'
+                error = f'Ошибка при выполнении операции'
             else:
                 return redirect(url_for('auth.login'))
         flash(error)
-        
-    return render_template('auth/register.html')
+    return render_template('auth/firsttime.html')
     
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
+    db = get_db()
+    if int(db.execute('SELECT count(*) FROM User').fetchone()[0]) == 0:
+        return redirect(url_for('auth.firsttime'))
     if request.method == 'POST':
         login = request.form['login']
         password = request.form['password']
-        db = get_db()
         error = None
         user = db.execute('SELECT * FROM User WHERE Login = ?', (login,)).fetchone()
         if not user:
-            error = 'Неверный логин'
+            error = 'Такого логина не существует!'
         elif not check_password_hash(user['PasswordHash'], password):
-            error = 'Неверный пароль'
-
+            error = 'Пароль неверный!'
         if not error:
             session.clear()
             session['user_id'] = user['Id']

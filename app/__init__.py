@@ -16,7 +16,10 @@ def create_app(test_config=None):
     from . import auth
     app.register_blueprint(auth.bp)
 
+    from .auth import login_required
+
     @app.route('/')
+    @login_required
     def index():
         return 'passed'
     
