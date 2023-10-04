@@ -17,10 +17,11 @@ def create_app(test_config=None):
     app.register_blueprint(auth.bp)
 
     from .auth import login_required
+    from flask import render_template
 
     @app.route('/')
     @login_required
     def index():
-        return 'passed'
+        return render_template('blank.html')
     
     return app

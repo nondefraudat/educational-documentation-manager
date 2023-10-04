@@ -1,0 +1,64 @@
+{% extends 'blank.html' %}
+
+{% block content %}
+<section id="default-section" class="default-section dark">
+	<div class="container">
+		<form>
+			<div class="subsection">
+				<h3 class="title text-center">Предметы</h3>
+				<table class="table">
+					<thead>
+						<tr>
+							{% block labels %}
+							<!-- <th scope="col">#</th>
+							<th scope="col">Название</th>
+							<th scope="col">ОПОП</th> -->
+							{% endblock %}
+						</tr>
+					</thead>
+					<tbody>
+						{% block rows %}
+						<!-- {% for subject in subjects %}
+						<tr>
+								<th scope="row">{{ subject.id }}</th>
+								<th>{{ subject.subjectName }}</th>
+								<th><a href="#"><i class="fa-solid fa-arrow-up-from-bracket"></i></a></th>
+						</tr>
+						{% endfor %} -->
+						{% endblock %}
+					</tbody>
+				</table>
+				<div class="container-fluid">
+					<a class="nav-link text-center" href="#" data-bs-toggle="modal" data-bs-target="#addUser">
+						<input aria-describedby="basic-addon1" class="form-control" id="submit" name="submit" type="submit" value="Добавить">
+					</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</section>
+
+<div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Добавить предмет</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form action="" method="post" novalidate>
+					{{ form.hidden_tag() }}
+					<div class="row subsection">
+						<div class="form-group col-sm-12 mb-2">
+								{{ form.subjectName() }}
+						</div>
+						<div class="form-group col-sm-12 mb-2">
+								{{ form.submit() }}
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
