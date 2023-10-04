@@ -5,32 +5,22 @@
 	<div class="container">
 		<form>
 			<div class="subsection">
-				<h3 class="title text-center">Предметы</h3>
+				<h3 class="title text-center">{% block table_title %}{% endblock %}</h3>
 				<table class="table">
 					<thead>
 						<tr>
 							{% block labels %}
-							<!-- <th scope="col">#</th>
-							<th scope="col">Название</th>
-							<th scope="col">ОПОП</th> -->
 							{% endblock %}
 						</tr>
 					</thead>
 					<tbody>
 						{% block rows %}
-						<!-- {% for subject in subjects %}
-						<tr>
-								<th scope="row">{{ subject.id }}</th>
-								<th>{{ subject.subjectName }}</th>
-								<th><a href="#"><i class="fa-solid fa-arrow-up-from-bracket"></i></a></th>
-						</tr>
-						{% endfor %} -->
 						{% endblock %}
 					</tbody>
 				</table>
 				<div class="container-fluid">
-					<a class="nav-link text-center" href="#" data-bs-toggle="modal" data-bs-target="#addUser">
-						<input aria-describedby="basic-addon1" class="form-control" id="submit" name="submit" type="submit" value="Добавить">
+					<a class="nav-link text-center" href="#" data-bs-toggle="modal" data-bs-target="#add-row">
+						<input aria-describedby="basic-addon1" class="form-control" name="open-modal" type="submit" value="Добавить">
 					</a>
 				</div>
 			</div>
@@ -38,22 +28,23 @@
 	</div>
 </section>
 
-<div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="add-row" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Добавить предмет</h5>
+				<h5 class="modal-title" id="exampleModalLabel">{% block modal_title %}{% endblock %}</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
-				<form action="" method="post" novalidate>
-					{{ form.hidden_tag() }}
+				<form action="" method="POST" novalidate>
 					<div class="row subsection">
+            {% block modal_form %}
 						<div class="form-group col-sm-12 mb-2">
 								{{ form.subjectName() }}
 						</div>
+            {% endblock %}
 						<div class="form-group col-sm-12 mb-2">
-								{{ form.submit() }}
+              <input aria-describedby="basic-addon1" class="form-control" name="add-row" type="submit" value="Добавить">
 						</div>
 					</div>
 				</form>

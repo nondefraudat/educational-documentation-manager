@@ -3,6 +3,10 @@ html, body {
     background-color: #a8babf;
 }
 
+.force-color {
+    background-color: #a8babf;
+}
+
 .default-section {
 	padding-bottom: 50px;
 	font-family: 'Montserrat', sans-serif;

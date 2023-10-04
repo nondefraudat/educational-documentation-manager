@@ -1,1 +1,79 @@
-{% extends 'blank.html' %}
+{% extends 'table.html' %}
+
+{% block table_title %}Преподаватели{% endblock %}
+
+{% block labels %}
+<th scope="col">#</th>
+<th scope="col">ФИО</th>
+{% endblock %}
+
+{% block rows %}
+{% for teacher in teachers %}
+<tr>
+    <th scope="row">{{ teacher['Id'] }}</th>
+    <th scope="row">{{ '{} {} {}'.format(teacher['Surname'],
+            teacher['Name'], teacher['Patronymic']) }}</th>
+</tr>
+{% endfor %}
+{% endblock %}
+
+{% block modal_title %}Добавить преподавателя{% endblock %}
+
+{% block modal_form %}
+<div class="form-group col-sm-12 mb-2">
+    <input class="form-control"
+                    name="surname"
+                    aria-describedby="basic-addon1"
+                    placeholder="Фамилия"
+                    required>
+</div>
+<div class="form-group col-sm-12 mb-2">
+    <input class="form-control"
+                    name="name"
+                    aria-describedby="basic-addon1"
+                    placeholder="Имя"
+                    required>
+</div>
+<div class="form-group col-sm-12 mb-2">
+    <input class="form-control"
+                    name="patronymic"
+                    aria-describedby="basic-addon1"
+                    placeholder="Отчество"
+                    required>
+</div>
+<div class="form-group col-sm-12 mb-2">
+    <input class="form-control"
+                    name="department"
+                    aria-describedby="basic-addon1"
+                    placeholder="Кафедра"
+                    required>
+</div>
+<div class="form-group col-sm-12 mb-2">
+    <input class="form-control"
+                    name="faculty"
+                    aria-describedby="basic-addon1"
+                    placeholder="Факультет"
+                    required>
+</div>
+<div class="form-group col-sm-12 mb-2">
+    <input class="form-control"
+                    name="rank"
+                    aria-describedby="basic-addon1"
+                    placeholder="Звание"
+                    required>
+</div>
+<div class="form-group col-sm-12 mb-2">
+    <input class="form-control"
+                    name="position"
+                    aria-describedby="basic-addon1"
+                    placeholder="Должность"
+                    required>
+</div>
+<div class="form-group col-sm-12 mb-2">
+    <input class="form-control"
+                    name="degree"
+                    aria-describedby="basic-addon1"
+                    placeholder="Ученая степень"
+                    required>
+</div>
+{% endblock %}

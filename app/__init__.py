@@ -15,13 +15,15 @@ def create_app(test_config=None):
     
     from . import auth
     app.register_blueprint(auth.bp)
+    from . import admforms
+    app.register_blueprint(admforms.bp)
 
     from .auth import login_required
-    from flask import render_template
+    from flask import redirect, url_for
 
     @app.route('/')
     @login_required
     def index():
-        return render_template('blank.html')
-    
+        return redirect(url_for('admforms.teachers'))
+
     return app
