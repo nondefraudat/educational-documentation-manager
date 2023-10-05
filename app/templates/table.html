@@ -28,20 +28,17 @@
 	</div>
 </section>
 
-<div class="modal fade" id="add-row" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="add-row" tabindex="-1" aria-labelledby="#add-row-label" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">{% block modal_title %}{% endblock %}</h5>
+				<h5 class="modal-title" id="add-row-label">{% block modal_title %}{% endblock %}</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
 				<form action="" method="POST" novalidate>
 					<div class="row subsection">
             {% block modal_form %}
-						<div class="form-group col-sm-12 mb-2">
-								{{ form.subjectName() }}
-						</div>
             {% endblock %}
 						<div class="form-group col-sm-12 mb-2">
               <input aria-describedby="basic-addon1" class="form-control" name="add-row" type="submit" value="Добавить">
@@ -52,4 +49,5 @@
 		</div>
 	</div>
 </div>
+{{ super() }}
 {% endblock %}
