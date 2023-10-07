@@ -100,3 +100,32 @@ def teachers():
         flash(error)
     return render_template('admforms/teachers.html', teachers=db.execute('SELECT * FROM Teacher').fetchall())
 
+@bp.route('/departments', methods=('GET', 'POST'))
+@login_required
+def departments():
+    db = get_db()
+    if request.method == 'POST':
+        department_name = request.form['department']
+
+        error = None
+        if not department_name:
+            error = 'Не указано название кафедры!'
+
+        if not error:
+            try:
+                department_id = None
+                department = db.execute('SELECT * FROM Department WHERE "Name" = ?', (department_name,)).fetchone()
+                if department:
+                    department_id = department['Id']
+                else:
+                    department_id = db.execute('INSERT INTO Department ("Name") VALUES (?)', (department_name,)).lastrowid
+                    db.commit()
+                    db.execute('INSERT INTO departments ("Name", DepartmentId) VALUES (?, ?)',
+                               (department_name, department_id))
+                    db.commit()
+            except db.IntegrityError:
+                error = 'Ошибка при выполнении операции'
+            else:
+                return redirect(url_for('admforms.departments'))
+        flash(error)
+    return render_template('admforms/departments.html', departments=db.execute('SELECT * FROM Department').fetchall())
