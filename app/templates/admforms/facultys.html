@@ -1,0 +1,29 @@
+{% extends 'table.html' %}
+
+{% block table_title %}Факультеты{% endblock %}
+
+{% block labels %}
+<th scope="col">#</th>
+<th scope="col">Название Кафедра</th>
+{% endblock %}
+
+{% block rows %}
+{% for faculty in facultys %}
+<tr>
+    <th scope="row">{{ faculty['Id'] }}</td>
+    <th scope="row">{{ faculty['Name'] }}</th>  
+</tr>
+{% endfor %}
+{% endblock %}
+
+{% block modal_title %}Добавить Факультет{% endblock %}
+
+{% block modal_form %}
+<div class="form-group col-sm-12 mb-2">
+    <input class="form-control"
+           name="faculty"
+           aria-describedby="basic-addon1"
+           placeholder="Факультет"
+           required>
+</div>
+{% endblock %}

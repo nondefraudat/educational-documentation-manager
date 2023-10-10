@@ -1,0 +1,29 @@
+{% extends 'table.html' %}
+
+{% block table_title %}Должности{% endblock %}
+
+{% block labels %}
+<th scope="col">#</th>
+<th scope="col">Название Дожности</th>
+{% endblock %}
+
+{% block rows %}
+{% for position in positions %}
+<tr>
+    <th scope="row">{{ position['Id'] }}</td>
+    <th scope="row">{{ position['Name'] }}</th>  
+</tr>
+{% endfor %}
+{% endblock %}
+
+{% block modal_title %}Добавить Должность{% endblock %}
+
+{% block modal_form %}
+<div class="form-group col-sm-12 mb-2">
+    <input class="form-control"
+           name="position"
+           aria-describedby="basic-addon1"
+           placeholder="Должность"
+           required>
+</div>
+{% endblock %}

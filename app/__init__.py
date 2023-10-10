@@ -28,5 +28,17 @@ def create_app(test_config=None):
     
     def index():
         return redirect(url_for('admforms.departments'))
+    
+    def index():
+        return redirect(url_for('admforms.facultys'))
+    
+    def index():
+        return redirect(url_for('admforms.ranks'))
+    
+    def index():
+        return redirect(url_for('admforms.positions'))
+    
+    def index():
+        return redirect(url_for('admforms.degrees'))
 
     return app
