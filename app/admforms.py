@@ -247,3 +247,33 @@ def degrees():
         flash(error)
     return render_template('admforms/degrees.html', degrees=db.execute('SELECT * FROM Degree').fetchall())
 
+@bp.route('/subjects', methods=('GET', 'POST'))
+@login_required
+def subjects():
+    db = get_db()
+    if request.method == 'POST':
+        subject_name = request.form['subject']
+
+        error = None
+        if not subject_name:
+            error = 'Не указана учёная степень!'
+
+        if not error:
+            try:
+                subject_id = None
+                subject = db.execute('SELECT * FROM Subject WHERE "Name" = ?',
+                        (subject_name,)).fetchone()
+                if subject:
+                    subject_id = subject.get('Id')
+                else:
+                    subject_id = db.execute('INSERT INTO Subject ("Name") VALUES (?)',
+                            (subject_name,)).lastrowid
+                    db.commit()
+
+            except db.IntegrityError:
+                error = 'Ошибка при выполнении операции'
+            else:
+                return redirect(url_for('admforms.subjects'))
+        flash(error)
+    return render_template('admforms/subjects.html', subjects=db.execute('SELECT * FROM Subject').fetchall())
+

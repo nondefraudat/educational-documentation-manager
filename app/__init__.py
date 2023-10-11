@@ -40,5 +40,8 @@ def create_app(test_config=None):
     
     def index():
         return redirect(url_for('admforms.degrees'))
+    
+    def index():
+        return redirect(url_for('admforms.subjects'))
 
     return app
