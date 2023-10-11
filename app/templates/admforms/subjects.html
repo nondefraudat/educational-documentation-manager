@@ -1,0 +1,29 @@
+{% extends 'table.html' %}
+
+{% block table_title %}Предметы{% endblock %}
+
+{% block labels %}
+<th scope="col">#</th>
+<th scope="col">Премет</th>
+{% endblock %}
+
+{% block rows %}
+{% for subject in subjects %}
+<tr>
+    <th scope="row">{{ subject['Id'] }}</td>
+    <th scope="row">{{ subject['Name'] }}</th>  
+</tr>
+{% endfor %}
+{% endblock %}
+
+{% block modal_title %}Добавить предмет{% endblock %}
+
+{% block modal_form %}
+<div class="form-group col-sm-12 mb-2">
+    <input class="form-control"
+           name="subject"
+           aria-describedby="basic-addon1"
+           placeholder="Предмет"
+           required>
+</div>
+{% endblock %}

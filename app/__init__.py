@@ -25,5 +25,23 @@ def create_app(test_config=None):
     @login_required
     def index():
         return redirect(url_for('admforms.teachers'))
+    
+    def index():
+        return redirect(url_for('admforms.departments'))
+    
+    def index():
+        return redirect(url_for('admforms.facultys'))
+    
+    def index():
+        return redirect(url_for('admforms.ranks'))
+    
+    def index():
+        return redirect(url_for('admforms.positions'))
+    
+    def index():
+        return redirect(url_for('admforms.degrees'))
+    
+    def index():
+        return redirect(url_for('admforms.subjects'))
 
     return app

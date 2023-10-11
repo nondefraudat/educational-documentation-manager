@@ -1,0 +1,29 @@
+{% extends 'table.html' %}
+
+{% block table_title %}Ранги{% endblock %}
+
+{% block labels %}
+<th scope="col">#</th>
+<th scope="col">Звание</th>
+{% endblock %}
+
+{% block rows %}
+{% for rank in ranks %}
+<tr>
+    <th scope="row">{{ rank['Id'] }}</td>
+    <th scope="row">{{ rank['Name'] }}</th>  
+</tr>
+{% endfor %}
+{% endblock %}
+
+{% block modal_title %}Добавить ранг{% endblock %}
+
+{% block modal_form %}
+<div class="form-group col-sm-12 mb-2">
+    <input class="form-control"
+           name="rank"
+           aria-describedby="basic-addon1"
+           placeholder="Звание"
+           required>
+</div>
+{% endblock %}
