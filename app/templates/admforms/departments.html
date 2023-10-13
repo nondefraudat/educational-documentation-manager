@@ -1,0 +1,29 @@
+{% extends 'table.html' %}
+
+{% block table_title %}Департаменты{% endblock %}
+
+{% block labels %}
+<th scope="col">#</th>
+<th scope="col">Номер Кафедры</th>
+{% endblock %}
+
+{% block rows %}
+{% for department in departments %}
+<tr>
+    <th scope="row">{{ department['Id'] }}</td>
+    <th scope="row">{{ department['Name'] }}</th>  
+</tr>
+{% endfor %}
+{% endblock %}
+
+{% block modal_title %}Добавить Кафедру{% endblock %}
+
+{% block modal_form %}
+<div class="form-group col-sm-12 mb-2">
+    <input class="form-control"
+           name="department"
+           aria-describedby="basic-addon1"
+           placeholder="Кафедра"
+           required>
+</div>
+{% endblock %}

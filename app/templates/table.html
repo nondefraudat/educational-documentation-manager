@@ -1,0 +1,53 @@
+{% extends 'blank.html' %}
+
+{% block content %}
+<section id="default-section" class="default-section dark">
+	<div class="container">
+		<form>
+			<div class="subsection">
+				<h3 class="title text-center">{% block table_title %}{% endblock %}</h3>
+				<table class="table">
+					<thead>
+						<tr>
+							{% block labels %}
+							{% endblock %}
+						</tr>
+					</thead>
+					<tbody>
+						{% block rows %}
+						{% endblock %}
+					</tbody>
+				</table>
+				<div class="container-fluid">
+					<a class="nav-link text-center" href="#" data-bs-toggle="modal" data-bs-target="#add-row">
+						<input aria-describedby="basic-addon1" class="form-control" name="open-modal" type="submit" value="Добавить">
+					</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</section>
+
+<div class="modal fade" id="add-row" tabindex="-1" aria-labelledby="#add-row-label" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="add-row-label">{% block modal_title %}{% endblock %}</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form action="" method="POST" novalidate>
+					<div class="row subsection">
+            {% block modal_form %}
+            {% endblock %}
+						<div class="form-group col-sm-12 mb-2">
+              <input aria-describedby="basic-addon1" class="form-control" name="add-row" type="submit" value="Добавить">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{{ super() }}
+{% endblock %}

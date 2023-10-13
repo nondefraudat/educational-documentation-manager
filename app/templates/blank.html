@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <img src="https://www.rshu.ru/logo/logo2020_rus.png" alt="Logo" width="40px">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Меню
+          </a>
+          <ul class="dropdown-menu">
+						{% block menu %}
+            <li><a class="dropdown-item" href="#">Action</a></li>
+						{% endblock %}
+          </ul>
+        </li>
+      </ul>
+			<a class="nav-link me-3" href="#" role="button" data-bs-toggle="modal" data-bs-target="#user-info"><i class="fa-solid fa-user"></i></a>
+			<a class="nav-link" href="{{ url_for('auth.logout') }}"><i class="fa-solid fa-right-from-bracket"></i></a>
+    </div>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="modal fade" id="user-info" tabindex="-1" aria-labelledby="#user-info-label" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="user-info-label">Информация о пользователе</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form action="" method="POST" novalidate>
+					<div class="row subsection">
+            <div class="form-group col-sm-12 mb-2">
+                <input class="form-control"
+                                name="user-surname"
+                                aria-describedby="basic-addon1"
+                                placeholder="Фамилия"
+                                required>
+            </div>
+            <div class="form-group col-sm-12 mb-2">
+                <input class="form-control"
+                                name="user-name"
+                                aria-describedby="basic-addon1"
+                                placeholder="Имя"
+                                required>
+            </div>
+            <div class="form-group col-sm-12 mb-2">
+                <input class="form-control"
+                                name="user-patronymic"
+                                aria-describedby="basic-addon1"
+                                placeholder="Отчество"
+                                required>
+            </div>
+            <div class="form-group col-sm-12 mb-2">
+                <input class="form-control"
+                                name="user-department"
+                                aria-describedby="basic-addon1"
+                                placeholder="Кафедра"
+                                required>
+            </div>
+            <div class="form-group col-sm-12 mb-2">
+                <input class="form-control"
+                                name="user-faculty"
+                                aria-describedby="basic-addon1"
+                                placeholder="Факультет"
+                                required>
+            </div>
+            <div class="form-group col-sm-12 mb-2">
+                <input class="form-control"
+                                name="user-rank"
+                                aria-describedby="basic-addon1"
+                                placeholder="Звание"
+                                required>
+            </div>
+            <div class="form-group col-sm-12 mb-2">
+                <input class="form-control"
+                                name="user-position"
+                                aria-describedby="basic-addon1"
+                                placeholder="Должность"
+                                required>
+            </div>
+            <div class="form-group col-sm-12 mb-2">
+                <input class="form-control"
+                                name="user-degree"
+                                aria-describedby="basic-addon1"
+                                placeholder="Ученая степень"
+                                required>
+            </div>
+						<div class="form-group col-sm-12 mb-2">
+              <input aria-describedby="basic-addon1" class="form-control" name="update-user-info" type="submit" value="Сохранить">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

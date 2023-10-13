@@ -1,0 +1,29 @@
+{% extends 'table.html' %}
+
+{% block table_title %}Учёная степень{% endblock %}
+
+{% block labels %}
+<th scope="col">#</th>
+<th scope="col">Ученая степень</th>
+{% endblock %}
+
+{% block rows %}
+{% for degree in degrees %}
+<tr>
+    <th scope="row">{{ degree['Id'] }}</td>
+    <th scope="row">{{ degree['Name'] }}</th>  
+</tr>
+{% endfor %}
+{% endblock %}
+
+{% block modal_title %}Добавить Учёную степень{% endblock %}
+
+{% block modal_form %}
+<div class="form-group col-sm-12 mb-2">
+    <input class="form-control"
+           name="degree"
+           aria-describedby="basic-addon1"
+           placeholder="Учёная степень"
+           required>
+</div>
+{% endblock %}
