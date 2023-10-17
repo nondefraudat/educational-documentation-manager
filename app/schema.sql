@@ -90,16 +90,33 @@ CREATE TABLE TeacherGroupSubjectRelation (
     FOREIGN KEY(StudentGroupId) REFERENCES StudentGroup(Id)
 );
 
-CREATE TABLE Question (
+CREATE TABLE QuestionType (
     Id INTEGER PRIMARY KEY AUTOINCREMENT,
-    "Value" TEXT UNIQUE NOT NULL
+    "Name" TEXT UNIQUE NOT NULL
 );
 
-CREATE TABLE Answer (
+CREATE TABLE Question (
     Id INTEGER PRIMARY KEY AUTOINCREMENT,
-    "Value" TEXT NOT NULL,
-    TeacherId INTEGER NOT NULL,
+    "Tag" TEXT UNIQUE NOT NULL
+    QuestionTypeId TEXT UNIQUE NOT NULL
+    "Value" TEXT UNIQUE NOT NULL
+    QuestionTypeId REFERENCES QuestionType(Id)
+);
+
+CREATE TABLE SelectionAnswer (
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    QuestionId INTEGER NOT NULL,
     TeacherGroupSubjectRelationId INTEGER NOT NULL,
-    FOREIGN KEY(TeacherId) REFERENCES Teacher(Id),
+    "Value" TEXT NOT NULL,
+    FOREIGN KEY(QuestionId) REFERENCES QuestionType(Id),
+    FOREIGN KEY(TeacherGroupSubjectRelationId) REFERENCES TeacherGroupSubjectRelation(Id)
+);
+
+CREATE TABLE TextAnswer (
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    QuestionId INTEGER NOT NULL,
+    TeacherGroupSubjectRelationId INTEGER NOT NULL,
+    "Value" TEXT NOT NULL,
+    FOREIGN KEY(QuestionId) REFERENCES QuestionType(Id),
     FOREIGN KEY(TeacherGroupSubjectRelationId) REFERENCES TeacherGroupSubjectRelation(Id)
 );

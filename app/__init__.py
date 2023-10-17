@@ -30,7 +30,7 @@ def create_app(test_config=None):
         return redirect(url_for('admforms.departments'))
     
     def index():
-        return redirect(url_for('admforms.facultys'))
+        return redirect(url_for('admforms.faculties'))
     
     def index():
         return redirect(url_for('admforms.ranks'))
