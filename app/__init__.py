@@ -2,6 +2,9 @@ from flask import Flask
 import os
 
 def create_app(test_config=None):
+    '''
+    Точка входа
+    '''
     app = Flask(__name__, instance_relative_config=True)
     try:
         os.makedirs(app.instance_path)
@@ -24,24 +27,6 @@ def create_app(test_config=None):
     @app.route('/')
     @login_required
     def index():
-        return redirect(url_for('admforms.teachers'))
-    
-    def index():
-        return redirect(url_for('admforms.departments'))
-    
-    def index():
-        return redirect(url_for('admforms.facultys'))
-    
-    def index():
-        return redirect(url_for('admforms.ranks'))
-    
-    def index():
-        return redirect(url_for('admforms.positions'))
-    
-    def index():
         return redirect(url_for('admforms.degrees'))
-    
-    def index():
-        return redirect(url_for('admforms.subjects'))
 
     return app

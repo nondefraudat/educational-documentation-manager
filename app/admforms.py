@@ -128,9 +128,9 @@ def departments():
         flash(error)
     return render_template('admforms/departments.html', departments=db.execute('SELECT * FROM Department').fetchall())
 
-@bp.route('/facultys', methods=('GET', 'POST'))
+@bp.route('/faculties', methods=('GET', 'POST'))
 @login_required
-def facultys():
+def faculties():
     db = get_db()
     if request.method == 'POST':
         faculty_name = request.form['faculty']
@@ -154,9 +154,9 @@ def facultys():
             except db.IntegrityError:
                 error = 'Ошибка при выполнении операции'
             else:
-                return redirect(url_for('admforms.facultys'))
+                return redirect(url_for('admforms.faculties'))
         flash(error)
-    return render_template('admforms/facultys.html', facultys=db.execute('SELECT * FROM Faculty').fetchall())
+    return render_template('admforms/faculties.html', faculties=db.execute('SELECT * FROM Faculty').fetchall())
 
 @bp.route('/ranks', methods=('GET', 'POST'))
 @login_required
