@@ -1,5 +1,38 @@
 from docxtpl import DocxTemplate
 
-template = DocxTemplate('templates/word/annotation.docx')
+docname : str = 'templates/word/annotation.docx'
+outname : str = 'test.docx'
+
+print('Документ:', docname)
+template = DocxTemplate(docname)
+print('Теги: ')
 for tag in template.get_undeclared_template_variables():
-    print(tag)
+    print(f'\'{tag}\'')
+
+data : dict = {
+    'direction_name' : 'Программная инженерия',
+    'direction_code' : '09.03.04',
+    'subject_skills' : 'Использовать методы обоснования принимаемых проектных решений при разработке ПО',
+    'subject_themes' : {
+        'Тема 1. Основы тестирования',
+        'Тема 2. Документирование тестирования',
+        'Тема 3. Виды тестирования, применяющиеся на различных этапах разработки',
+        'Тема 4. Процесс разработки ПО и тестирование'
+    },
+    'specialization_name' : 'Геопространственные цифровые двойники',
+    'qualification' : 'Бакалавр',
+    'subject_name' : 'Проектирование тестов',
+    'subject_tools' : 'Навыками использования методов обоснования принимаемых проектных решений при разработке ПО',
+    'subject_knowlege' : 'методы обоснования принимаемых проектных решений при разработке ПО',
+    'subject_target' : 'Научить студентов основным методам и приёмам тестирования компьютерных программ',
+    'subject_tasks' : {
+        'получение студентами знаний о теоретических основах тестирования;',
+        'приобретение студентами навыков создания собственных тест-кейсов;',
+        'освоение современных инструментов тестирования;',
+        'получение опыта тестирования компьютерных программ'
+    }
+}
+
+template.render(data)
+template.save(outname)
+print(f'сохранено как "{outname}"')
